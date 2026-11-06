@@ -1,0 +1,117 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account and profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 150 },
+        "photoURL": { "type": "string", "maxLength": 500 },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "plan": { "type": "string", "enum": ["free", "plus", "pro"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role", "plan"]
+    },
+    "Conversation": {
+      "title": "Conversation Thread",
+      "description": "AI conversation thread belonging to a user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 120 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title"]
+    },
+    "Message": {
+      "title": "Chat Message",
+      "description": "Individual message in a conversation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "conversationId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "role": { "type": "string", "enum": ["user", "assistant", "system"] },
+        "content": { "type": "string", "maxLength": 30000 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "conversationId", "userId", "role", "content"]
+    },
+    "Task": {
+      "title": "Productivity Task",
+      "description": "Personal planner task or to-do item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "completed": { "type": "boolean" },
+        "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+        "dueDate": { "type": "string", "maxLength": 50 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "title", "completed"]
+    },
+    "Subscription": {
+      "title": "Subscription Record",
+      "description": "User subscription status and billing verification record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "plan": { "type": "string", "enum": ["free", "plus", "pro"] },
+        "status": { "type": "string", "enum": ["active", "pending", "cancelled", "expired"] },
+        "gateway": { "type": "string", "maxLength": 50 },
+        "transactionRef": { "type": "string", "maxLength": 100 },
+        "startDate": { "type": "string" },
+        "expiryDate": { "type": "string" }
+      },
+      "required": ["id", "userId", "plan", "status"]
+    },
+    "Feedback": {
+      "title": "User Feedback",
+      "description": "Feedback message from user to support/administration",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "message": { "type": "string", "maxLength": 2000 },
+        "status": { "type": "string", "enum": ["new", "reviewed", "resolved"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "message"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles containing account and plan info"
+    },
+    "/conversations/{conversationId}": {
+      "schema": "Conversation",
+      "description": "Conversation threads created by users"
+    },
+    "/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages sent within conversations"
+    },
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User personal productivity tasks"
+    },
+    "/subscriptions/{subscriptionId}": {
+      "schema": "Subscription",
+      "description": "Subscription records and payment verifications"
+    },
+    "/feedback/{feedbackId}": {
+      "schema": "Feedback",
+      "description": "User feedback reports"
+    }
+  }
+}

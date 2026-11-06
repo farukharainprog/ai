@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+  
+  html {
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(167, 176, 192, 0.2);
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(40, 123, 255, 0.4);
+  }
+}
+
+.nexora-gradient-text {
+  background: linear-gradient(135deg, #287BFF 0%, #8955FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nexora-gradient-border {
+  border-image: linear-gradient(135deg, rgba(40, 123, 255, 0.4), rgba(137, 85, 255, 0.4)) 1;
+}
+
+.nexora-glow {
+  box-shadow: 0 0 35px -5px rgba(40, 123, 255, 0.25);
+}
+
+.nexora-glow-subtle {
+  box-shadow: 0 0 20px -3px rgba(137, 85, 255, 0.15);
+}

@@ -1,0 +1,6 @@
+{
+  "name": "NEXORA Intelligence",
+  "description": "NEXORA Intelligence - Your Smart Digital Partner. Premium AI productivity platform featuring chat, writing studio, study assistant, multi-lingual translator, business strategist, and personal planner.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
